@@ -11,7 +11,7 @@ and UICollectionView on iOS.
 
 `npm install --save recyclerlistview`
 
-For latest beta:  
+For latest beta:
 `npm install --save recyclerlistview@beta`
 
 * **[Overview and features](#overview-and-features)**
@@ -62,12 +62,12 @@ In case you cannot determine heights of items in advance just set `forceNonDeter
 
 ## Demo
 
-**Production Flipkart Grocery Demo Video (or try the app):** https://youtu.be/6YqEqP3MmoU  
-**Infinite Loading/View Change (Expo):** https://snack.expo.io/@naqvitalha/rlv-demo  
-**Mixed ViewTypes:** https://snack.expo.io/B1GYad52b  
-**extendedState,stableIDs and ItemAnimator (Expo):** https://snack.expo.io/@arunreddy10/19bb8e  
-**Sample project:** https://github.com/naqvitalha/travelMate  
-**Web Sample (Using RNW):** https://codesandbox.io/s/k54j2zx977, https://jolly-engelbart-8ff0d0.netlify.com/  
+**Production Flipkart Grocery Demo Video (or try the app):** https://youtu.be/6YqEqP3MmoU
+**Infinite Loading/View Change (Expo):** https://snack.expo.io/@naqvitalha/rlv-demo
+**Mixed ViewTypes:** https://snack.expo.io/B1GYad52b
+**extendedState,stableIDs and ItemAnimator (Expo):** https://snack.expo.io/@arunreddy10/19bb8e
+**Sample project:** https://github.com/naqvitalha/travelMate
+**Web Sample (Using RNW):** https://codesandbox.io/s/k54j2zx977, https://jolly-engelbart-8ff0d0.netlify.com/
 **Context Preservation Sample:** https://github.com/naqvitalha/recyclerlistview-context-preservation-demo
 
 **Other Video:** https://www.youtube.com/watch?v=Tnv4HMmPgMc
@@ -81,10 +81,10 @@ In case you cannot determine heights of items in advance just set `forceNonDeter
 | layoutProvider | Yes | BaseLayoutProvider | Constructor function that defines the layout (height / width) of each element |
 | dataProvider | Yes | DataProvider | Constructor function the defines the data for each element |
 | contextProvider | No | ContextProvider | Used to maintain scroll position in case view gets destroyed, which often happens with back navigation |
-| rowRenderer | Yes | (type: string \| number, data: any, index: number) => JSX.Element \| JSX.Element[] \| null | Method that returns react component to be rendered. You get the type, data, index and extendedState of the view in the callback | 
-| initialOffset | No | number | Initial offset you want to start rendering from; This is very useful if you want to maintain scroll context across pages. | 
+| rowRenderer | Yes | (type: string \| number, data: any, index: number) => JSX.Element \| JSX.Element[] \| null | Method that returns react component to be rendered. You get the type, data, index and extendedState of the view in the callback |
+| initialOffset | No | number | Initial offset you want to start rendering from; This is very useful if you want to maintain scroll context across pages. |
 | renderAheadOffset | No | number | specify how many pixels in advance you want views to be rendered. Increasing this value can help reduce blanks (if any). However, keeping this as low as possible should be the intent. Higher values also increase re-render compute |
-| isHorizontal | No | boolean | If true, the list will operate horizontally rather than vertically | 
+| isHorizontal | No | boolean | If true, the list will operate horizontally rather than vertically |
 | onScroll | No | rawEvent: ScrollEvent, offsetX: number, offsetY: number) => void | On scroll callback function that executes as a user scrolls |
 | onRecreate | No | (params: OnRecreateParams) => void | callback function that gets executed when recreating the recycler view from context provider |
 | externalScrollView | No | { new (props: ScrollViewDefaultProps): BaseScrollView } | Use this to pass your on implementation of BaseScrollView |
@@ -97,7 +97,7 @@ In case you cannot determine heights of items in advance just set `forceNonDeter
 | initialRenderIndex | No | number | Specify the initial item index you want rendering to start from. Preferred over initialOffset if both specified |
 | scrollThrottle | No | number |iOS only; Scroll throttle duration |
 | canChangeSize | No | boolean | Specify if size can change |
-| distanceFromWindow | No | number | **(Depricated)** Use `applyWindowCorrection()` API with `windowShift`. **[Usage?](#applywindowcorrection-usage)** |
+| distanceFromWindow | No | number | **(Deprecated)** Use `applyWindowCorrection()` API with `windowShift`. **[Usage?](#applywindowcorrection-usage)** |
 | applyWindowCorrection | No | (offset: number, windowCorrection: WindowCorrection) => void | (Enhancement/replacement to `distanceFromWindow` API) Allows updation of the visible windowBounds to based on correctional values passed. User can specify **windowShift**; in case entire RecyclerListWindow needs to shift down/up, **startCorrection**; in case when top window bound needs to be shifted for e.x. top window bound to be shifted down is a content overlapping the top edge of RecyclerListView, **endCorrection**: to alter bottom window bound for a similar use-case. **[Usage?](#applywindowcorrection-usage)** |
 | useWindowScroll | No | boolean | Web only; Layout Elements in window instead of a scrollable div |
 | disableRecycling | No | boolean | Turns off recycling |
@@ -117,7 +117,7 @@ For full feature set have a look at prop definitions of [RecyclerListView](https
 
 `applyWindowCorrection` is used to alter the visible window bounds of the RecyclerListView dynamically. The windowCorrection of RecyclerListView along with the current scroll offset are exposed to the user. The `windowCorrection` object consists of 3 numeric values:
  - `windowShift`        - Direct replacement of `distanceFromWindow` parameter. Window shift is the offset value by which the RecyclerListView as a whole is displaced within the StickyContainer, use this param to specify how far away the first list item is from window top. This value corrects the scroll offsets for StickyObjects as well as RecyclerListView.
- - `startCorrection`    - startCorrection is used to specify the shift in the top visible window bound, with which user can receive the correct Sticky header instance even when an external factor like CoordinatorLayout toolbar. 
+ - `startCorrection`    - startCorrection is used to specify the shift in the top visible window bound, with which user can receive the correct Sticky header instance even when an external factor like CoordinatorLayout toolbar.
  - `endCorrection`      - endCorrection is used to specify the shift in the bottom visible window bound, with which user can receive correct Sticky Footer instance when an external factor like bottom app bar is changing the visible view bound.
 
 As seen in the example below

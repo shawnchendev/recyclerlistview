@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Running TSLint..."
-tslint 'src/**/*.{ts,tsx}'
+echo "Running ESlint..."
+yarn lint
 
 echo "Build started..."
 echo "Removing old builds..."
