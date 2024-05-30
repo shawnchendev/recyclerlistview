@@ -91,7 +91,7 @@ export interface RecyclerListViewProps {
     onVisibleIndexesChanged?: TOnItemStatusChanged;
     onVisibleIndicesChanged?: TOnItemStatusChanged;
     renderFooter?: () => JSX.Element | JSX.Element[] | null;
-    externalScrollView?: { new(props: ScrollViewDefaultProps): BaseScrollView };
+    externalScrollView?: new(props: ScrollViewDefaultProps) => BaseScrollView;
     layoutSize?: Dimension;
     initialOffset?: number;
     initialRenderIndex?: number;
@@ -226,7 +226,7 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
             throw new CustomError(RecyclerListViewExceptions.usingOldVisibleIndexesChangedParam);
         }
         if (newProps.onVisibleIndicesChanged) {
-            this._virtualRenderer.attachVisibleItemsListener(newProps.onVisibleIndicesChanged!);
+            this._virtualRenderer.attachVisibleItemsListener(newProps.onVisibleIndicesChanged);
         }
     }
 
@@ -625,7 +625,7 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
             throw new CustomError(RecyclerListViewExceptions.usingOldVisibleIndexesChangedParam);
         }
         if (props.onVisibleIndicesChanged) {
-            this._virtualRenderer.attachVisibleItemsListener(props.onVisibleIndicesChanged!);
+            this._virtualRenderer.attachVisibleItemsListener(props.onVisibleIndicesChanged);
         }
         this._params = {
             initialOffset: this._initialOffset ? this._initialOffset : props.initialOffset,
@@ -744,7 +744,7 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         }
     }
 
-    private _generateRenderStack(): Array<JSX.Element | null> {
+    private _generateRenderStack(): (JSX.Element | null)[] {
         const renderedItems = [];
         if (this.state) {
             for (const key in this.state.renderStack) {
